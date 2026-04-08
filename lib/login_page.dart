@@ -26,9 +26,9 @@ class _LoginPageState extends State<LoginPage> {
         MaterialPageRoute(builder: (_) => const HomePage()),
       );
     } else {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text("Invalid credentials")));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Invalid credentials")),
+      );
     }
   }
 
@@ -36,89 +36,96 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              "welcome Back",
-              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-            ),
-
-            const SizedBox(height: 10),
-
-            const Image(image: AssetImage('assets/images/Logo.png')),
-
-            const SizedBox(height: 10),
-
-            const Text(
-              "Login to your Aceount",
-              style: TextStyle(color: Colors.grey),
-            ),
-
-            const SizedBox(height: 20),
-
-            TextField(
-              controller: emailController,
-              decoration: InputDecoration(
-                hintText: "Email",
-                prefixIcon: const Icon(Icons.email),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 20),
-
-            TextField(
-              controller: passwordController,
-              obscureText: true,
-              decoration: InputDecoration(
-                hintText: "Password",
-                prefixIcon: const Icon(Icons.lock),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 20),
-
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: login,
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 15),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                child: const Text("Login"),
-              ),
-            ),
-            const SizedBox(height: 20),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch, // optional, makes buttons full width if you want
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            minHeight: MediaQuery.of(context).size.height,
+          ),
+          child: IntrinsicHeight(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    onPressed: () {},
-                    child: const Text("Forget Password"),
+                const SizedBox(height: 20),
+
+                // 🔥 Logo
+                const Image(
+                  image: AssetImage('assets/images/Logo.png'),
+                  height: 120,
+                ),
+
+                const SizedBox(height: 10),
+
+                const Text(
+                  "Login to your Account",
+                  style: TextStyle(color: Colors.grey),
+                ),
+
+                const SizedBox(height: 20),
+
+                // 📧 Email
+                TextField(
+                  controller: emailController,
+                  decoration: InputDecoration(
+                    hintText: "Email",
+                    prefixIcon: const Icon(Icons.email),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
                 ),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: TextButton(
-                    onPressed: () {},
-                    child: const Text("Register Button"),
+
+                const SizedBox(height: 20),
+
+                // 🔒 Password
+                TextField(
+                  controller: passwordController,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    hintText: "Password",
+                    prefixIcon: const Icon(Icons.lock),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
                 ),
+
+                const SizedBox(height: 20),
+
+                // 🔘 Login Button
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: login,
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 15),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: const Text("Login"),
+                  ),
+                ),
+
+                const SizedBox(height: 10),
+
+                // 🔗 Bottom buttons
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text("Register"),
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text("Forgot Password"),
+                    ),
+                  ],
+                ),
+
+                const Spacer(), // keeps layout balanced
               ],
             ),
-          ],
+          ),
         ),
       ),
     );

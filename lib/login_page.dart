@@ -83,17 +83,8 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
 
-            const SizedBox(height: 10),
-
-            Align(
-              alignment: Alignment.centerRight,
-              child: TextButton(
-                onPressed: () {},
-                child: const Text("Forget Password"),
-              ),
-            ),
-
             const SizedBox(height: 20),
+
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
@@ -106,6 +97,26 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 child: const Text("Login"),
               ),
+            ),
+            const SizedBox(height: 20),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch, // optional, makes buttons full width if you want
+              children: [
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () {},
+                    child: const Text("Forget Password"),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: TextButton(
+                    onPressed: () {},
+                    child: const Text("Register Button"),
+                  ),
+                ),
+              ],
             ),
           ],
         ),

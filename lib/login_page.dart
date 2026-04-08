@@ -35,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -44,6 +44,10 @@ class _LoginPageState extends State<LoginPage> {
               "welcome Back",
               style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
             ),
+
+            const SizedBox(height: 10),
+
+            const Image(image: AssetImage('assets/images/Logo.png')),
 
             const SizedBox(height: 10),
 
@@ -84,25 +88,25 @@ class _LoginPageState extends State<LoginPage> {
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
-                onPressed: (){}, 
+                onPressed: () {},
                 child: const Text("Forget Password"),
-                ),
+              ),
             ),
-            
-            const SizedBox(height: 20,),
+
+            const SizedBox(height: 20),
             SizedBox(
-               width: double.infinity,
-               child: ElevatedButton(
+              width: double.infinity,
+              child: ElevatedButton(
                 onPressed: login,
                 style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 15),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    child: const Text("Login"),
+                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
-            )
+                child: const Text("Login"),
+              ),
+            ),
           ],
         ),
       ),

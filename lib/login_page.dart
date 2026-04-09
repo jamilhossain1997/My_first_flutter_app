@@ -26,105 +26,110 @@ class _LoginPageState extends State<LoginPage> {
         MaterialPageRoute(builder: (_) => const HomePage()),
       );
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Invalid credentials")),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("Invalid credentials")));
     }
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            minHeight: MediaQuery.of(context).size.height,
-          ),
-          child: IntrinsicHeight(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(height: 20),
+      backgroundColor: Colors.grey[300],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const SizedBox(height: 40),
 
-                // 🔥 Logo
-                const Image(
-                  image: AssetImage('assets/images/Logo.png'),
-                  height: 120,
-                ),
+              // 🔥 Logo
+              const Image(
+                image: AssetImage('assets/images/Logo.png'),
+                height: 120,
+              ),
 
-                const SizedBox(height: 10),
+              const SizedBox(height: 10),
 
-                const Text(
+              const Center(
+                child: Text(
                   "Login to your Account",
-                  style: TextStyle(color: Colors.grey),
+                  style: TextStyle(color: Colors.grey, fontSize: 16),
                 ),
+              ),
 
-                const SizedBox(height: 20),
+              const SizedBox(height: 30),
 
-                // 📧 Email
-                TextField(
-                  controller: emailController,
-                  decoration: InputDecoration(
-                    hintText: "Email",
-                    prefixIcon: const Icon(Icons.email),
-                    border: OutlineInputBorder(
+              // 📧 Email
+              TextField(
+                controller: emailController,
+                decoration: InputDecoration(
+                  hintText: "Email",
+                  prefixIcon: const Icon(Icons.email),
+                  contentPadding: const EdgeInsets.symmetric(vertical: 15),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 20),
+
+              // 🔒 Password
+              TextField(
+                controller: passwordController,
+                obscureText: true,
+                decoration: InputDecoration(
+                  hintText: "Password",
+                  prefixIcon: const Icon(Icons.lock),
+                  contentPadding: const EdgeInsets.symmetric(vertical: 15),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 25),
+
+              // 🔘 Login Button
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: login,
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
+                  child: const Text("Login", style: TextStyle(fontSize: 16)),
                 ),
+              ),
 
-                const SizedBox(height: 20),
+              const SizedBox(height: 10),
 
-                // 🔒 Password
-                TextField(
-                  controller: passwordController,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    hintText: "Password",
-                    prefixIcon: const Icon(Icons.lock),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
+              // 🔗 Bottom buttons
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TextButton(onPressed: () {}, child: const Text("Register")),
+                  TextButton(
+                    onPressed: () {},
+                    child: const Text("Forgot Password"),
                   ),
-                ),
+                ],
+              ),
 
-                const SizedBox(height: 20),
-
-                // 🔘 Login Button
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: login,
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 15),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    child: const Text("Login"),
-                  ),
-                ),
-
-                const SizedBox(height: 10),
-
-                // 🔗 Bottom buttons
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    TextButton(
-                      onPressed: () {},
-                      child: const Text("Register"),
-                    ),
-                    TextButton(
-                      onPressed: () {},
-                      child: const Text("Forgot Password"),
-                    ),
-                  ],
-                ),
-
-                const Spacer(), // keeps layout balanced
-              ],
-            ),
+              const SizedBox(height: 40),
+            ],
           ),
         ),
       ),
